@@ -213,21 +213,21 @@ function Get-EpoAgentHandler {
 
     forEach ( $item in $result.result.list.element.EPORegisteredApacheServer ) {
 
-        $object = New-Object â€“TypeName PSObject
+        $object = New-Object –TypeName PSObject
 
-        $object | Add-Member â€“MemberType NoteProperty â€“Name autoId               -Value $item.'autoId'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name computerName         -Value $item.'computerName'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name dnsName              -Value $item.'dnsName'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name enabled              -Value $item.'enabled'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name key                  -Value $item.'key'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name lastKnownIp          -Value $item.'lastKnownIp'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name lastUpdate           -Value $item.'lastUpdate'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name masterHandler        -Value $item.'masterHandler'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name publishedDNSName     -Value $item.'publishedDNSName'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name publishedIP          -Value $item.'publishedIP'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name publishedNetBiosName -Value $item.'publishedNetBiosName'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name version              -Value $item.'version'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name versionMatch         -Value $item.'versionMatch'
+        $object | Add-Member –MemberType NoteProperty –Name autoId               -Value $item.'autoId'
+        $object | Add-Member –MemberType NoteProperty –Name computerName         -Value $item.'computerName'
+        $object | Add-Member –MemberType NoteProperty –Name dnsName              -Value $item.'dnsName'
+        $object | Add-Member –MemberType NoteProperty –Name enabled              -Value $item.'enabled'
+        $object | Add-Member –MemberType NoteProperty –Name key                  -Value $item.'key'
+        $object | Add-Member –MemberType NoteProperty –Name lastKnownIp          -Value $item.'lastKnownIp'
+        $object | Add-Member –MemberType NoteProperty –Name lastUpdate           -Value $item.'lastUpdate'
+        $object | Add-Member –MemberType NoteProperty –Name masterHandler        -Value $item.'masterHandler'
+        $object | Add-Member –MemberType NoteProperty –Name publishedDNSName     -Value $item.'publishedDNSName'
+        $object | Add-Member –MemberType NoteProperty –Name publishedIP          -Value $item.'publishedIP'
+        $object | Add-Member –MemberType NoteProperty –Name publishedNetBiosName -Value $item.'publishedNetBiosName'
+        $object | Add-Member –MemberType NoteProperty –Name version              -Value $item.'version'
+        $object | Add-Member –MemberType NoteProperty –Name versionMatch         -Value $item.'versionMatch'
 
         $colResult += $object
     }
@@ -286,11 +286,11 @@ function Get-EpoEncryptionKey {
 	        [xml]$result  = ($wc.downloadstring($URL)).replace("OK:`r`n","")
 
             # Return data results in an object
-            $object = New-Object â€“TypeName PSObject
-            $object | Add-Member â€“MemberType NoteProperty â€“Name key          â€“Value $result.mfeepeexportmachinekeys.current.key
-            $object | Add-Member â€“MemberType NoteProperty â€“Name algorithm    â€“Value $result.mfeepeexportmachinekeys.current.algorithm
-            $object | Add-Member â€“MemberType NoteProperty â€“Name algInfo      â€“Value $result.mfeepeexportmachinekeys.current.algInfo
-            $object | Add-Member â€“MemberType NoteProperty â€“Name recoveryData â€“Value $result.mfeepeexportmachinekeys.current.recoveryData
+            $object = New-Object –TypeName PSObject
+            $object | Add-Member –MemberType NoteProperty –Name key          –Value $result.mfeepeexportmachinekeys.current.key
+            $object | Add-Member –MemberType NoteProperty –Name algorithm    –Value $result.mfeepeexportmachinekeys.current.algorithm
+            $object | Add-Member –MemberType NoteProperty –Name algInfo      –Value $result.mfeepeexportmachinekeys.current.algInfo
+            $object | Add-Member –MemberType NoteProperty –Name recoveryData –Value $result.mfeepeexportmachinekeys.current.recoveryData
 
             return $object
         }
@@ -307,11 +307,11 @@ function Get-EpoEncryptionKey {
 	        [xml]$result  = ($wc.downloadstring($URL)).replace("OK:`r`n","")
 
             # Return data results in an object
-            $object = New-Object â€“TypeName PSObject
-            $object | Add-Member â€“MemberType NoteProperty â€“Name key          â€“Value $result.mfeepeexportmachinekeys.current.key
-            $object | Add-Member â€“MemberType NoteProperty â€“Name algorithm    â€“Value $result.mfeepeexportmachinekeys.current.algorithm
-            $object | Add-Member â€“MemberType NoteProperty â€“Name algInfo      â€“Value $result.mfeepeexportmachinekeys.current.algInfo
-            $object | Add-Member â€“MemberType NoteProperty â€“Name recoveryData â€“Value $result.mfeepeexportmachinekeys.current.recoveryData
+            $object = New-Object –TypeName PSObject
+            $object | Add-Member –MemberType NoteProperty –Name key          –Value $result.mfeepeexportmachinekeys.current.key
+            $object | Add-Member –MemberType NoteProperty –Name algorithm    –Value $result.mfeepeexportmachinekeys.current.algorithm
+            $object | Add-Member –MemberType NoteProperty –Name algInfo      –Value $result.mfeepeexportmachinekeys.current.algInfo
+            $object | Add-Member –MemberType NoteProperty –Name recoveryData –Value $result.mfeepeexportmachinekeys.current.recoveryData
 
             return $object
         }
@@ -347,9 +347,9 @@ function Get-EpoVersion {
     [xml]$xml     = $result
 
     # Return data results in an object
-    $object = New-Object â€“TypeName PSObject
-    $object | Add-Member â€“MemberType NoteProperty â€“Name EpoServer â€“Value $urlBase
-    $object | Add-Member â€“MemberType NoteProperty â€“Name EpoVersion â€“Value $xml.result
+    $object = New-Object –TypeName PSObject
+    $object | Add-Member –MemberType NoteProperty –Name EpoServer –Value $urlBase
+    $object | Add-Member –MemberType NoteProperty –Name EpoVersion –Value $xml.result
 
     return $object
 
@@ -401,17 +401,17 @@ function Get-EpoPolicy {
 
     forEach ( $item in $result.result.list.element.ObjectPolicy ) {
 
-        $object = New-Object â€“TypeName PSObject
+        $object = New-Object –TypeName PSObject
 
-        $object | Add-Member â€“MemberType NoteProperty â€“Name featureId   -Value $item.'featureId'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name featureName -Value $item.'featureName'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name objectId    -Value $item.'objectId'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name objectName  -Value $item.'objectName'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name objectNotes -Value $item.'objectNotes'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name productId   -Value $item.'productId'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name productName -Value $item.'productName'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name typeId      -Value $item.'typeId'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name typeName    -Value $item.'typeName'
+        $object | Add-Member –MemberType NoteProperty –Name featureId   -Value $item.'featureId'
+        $object | Add-Member –MemberType NoteProperty –Name featureName -Value $item.'featureName'
+        $object | Add-Member –MemberType NoteProperty –Name objectId    -Value $item.'objectId'
+        $object | Add-Member –MemberType NoteProperty –Name objectName  -Value $item.'objectName'
+        $object | Add-Member –MemberType NoteProperty –Name objectNotes -Value $item.'objectNotes'
+        $object | Add-Member –MemberType NoteProperty –Name productId   -Value $item.'productId'
+        $object | Add-Member –MemberType NoteProperty –Name productName -Value $item.'productName'
+        $object | Add-Member –MemberType NoteProperty –Name typeId      -Value $item.'typeId'
+        $object | Add-Member –MemberType NoteProperty –Name typeName    -Value $item.'typeName'
 
         $colResult += $object
     }
@@ -509,16 +509,16 @@ function Get-EpoServerTask {
 
         forEach ( $item in $result.result.list.serverTask ) {
 
-            $object = New-Object â€“TypeName PSObject
+            $object = New-Object –TypeName PSObject
 
-            $object | Add-Member â€“MemberType NoteProperty â€“Name TaskID          -Value $item.'id'
-            $object | Add-Member â€“MemberType NoteProperty â€“Name TaskName        -Value $item.'name'
-            $object | Add-Member â€“MemberType NoteProperty â€“Name TaskDescription -Value $item.'description'
-            $object | Add-Member â€“MemberType NoteProperty â€“Name TaskStartDate   -Value $item.'startDate'
-            $object | Add-Member â€“MemberType NoteProperty â€“Name TaskEndDate     -Value $item.'endDate'
-            $object | Add-Member â€“MemberType NoteProperty â€“Name TaskNextRunTime -Value $item.'nextRunTime'
-            $object | Add-Member â€“MemberType NoteProperty â€“Name TaskEnabled     -Value $item.'enabled'
-            $object | Add-Member â€“MemberType NoteProperty â€“Name TaskValid       -Value $item.'valid'
+            $object | Add-Member –MemberType NoteProperty –Name TaskID          -Value $item.'id'
+            $object | Add-Member –MemberType NoteProperty –Name TaskName        -Value $item.'name'
+            $object | Add-Member –MemberType NoteProperty –Name TaskDescription -Value $item.'description'
+            $object | Add-Member –MemberType NoteProperty –Name TaskStartDate   -Value $item.'startDate'
+            $object | Add-Member –MemberType NoteProperty –Name TaskEndDate     -Value $item.'endDate'
+            $object | Add-Member –MemberType NoteProperty –Name TaskNextRunTime -Value $item.'nextRunTime'
+            $object | Add-Member –MemberType NoteProperty –Name TaskEnabled     -Value $item.'enabled'
+            $object | Add-Member –MemberType NoteProperty –Name TaskValid       -Value $item.'valid'
 
             $colResult += $object
         }
@@ -543,16 +543,16 @@ function Get-EpoServerTask {
 
             forEach ( $item in $result.result.serverTask ) {
 
-                $object = New-Object â€“TypeName PSObject
+                $object = New-Object –TypeName PSObject
 
-                $object | Add-Member â€“MemberType NoteProperty â€“Name TaskID          -Value $item.'id'
-                $object | Add-Member â€“MemberType NoteProperty â€“Name TaskName        -Value $item.'name'
-                $object | Add-Member â€“MemberType NoteProperty â€“Name TaskDescription -Value $item.'description'
-                $object | Add-Member â€“MemberType NoteProperty â€“Name TaskStartDate   -Value $item.'startDate'
-                $object | Add-Member â€“MemberType NoteProperty â€“Name TaskEndDate     -Value $item.'endDate'
-                $object | Add-Member â€“MemberType NoteProperty â€“Name TaskNextRunTime -Value $item.'nextRunTime'
-                $object | Add-Member â€“MemberType NoteProperty â€“Name TaskEnabled     -Value $item.'enabled'
-                $object | Add-Member â€“MemberType NoteProperty â€“Name TaskValid       -Value $item.'valid'
+                $object | Add-Member –MemberType NoteProperty –Name TaskID          -Value $item.'id'
+                $object | Add-Member –MemberType NoteProperty –Name TaskName        -Value $item.'name'
+                $object | Add-Member –MemberType NoteProperty –Name TaskDescription -Value $item.'description'
+                $object | Add-Member –MemberType NoteProperty –Name TaskStartDate   -Value $item.'startDate'
+                $object | Add-Member –MemberType NoteProperty –Name TaskEndDate     -Value $item.'endDate'
+                $object | Add-Member –MemberType NoteProperty –Name TaskNextRunTime -Value $item.'nextRunTime'
+                $object | Add-Member –MemberType NoteProperty –Name TaskEnabled     -Value $item.'enabled'
+                $object | Add-Member –MemberType NoteProperty –Name TaskValid       -Value $item.'valid'
 
                 $colResult += $object
             }
@@ -590,16 +590,16 @@ function Get-EpoServerTask {
 
             forEach ( $item in $result.result.serverTask ) {
 
-                $object = New-Object â€“TypeName PSObject
+                $object = New-Object –TypeName PSObject
 
-                $object | Add-Member â€“MemberType NoteProperty â€“Name TaskID          -Value $item.'id'
-                $object | Add-Member â€“MemberType NoteProperty â€“Name TaskName        -Value $item.'name'
-                $object | Add-Member â€“MemberType NoteProperty â€“Name TaskDescription -Value $item.'description'
-                $object | Add-Member â€“MemberType NoteProperty â€“Name TaskStartDate   -Value $item.'startDate'
-                $object | Add-Member â€“MemberType NoteProperty â€“Name TaskEndDate     -Value $item.'endDate'
-                $object | Add-Member â€“MemberType NoteProperty â€“Name TaskNextRunTime -Value $item.'nextRunTime'
-                $object | Add-Member â€“MemberType NoteProperty â€“Name TaskEnabled     -Value $item.'enabled'
-                $object | Add-Member â€“MemberType NoteProperty â€“Name TaskValid       -Value $item.'valid'
+                $object | Add-Member –MemberType NoteProperty –Name TaskID          -Value $item.'id'
+                $object | Add-Member –MemberType NoteProperty –Name TaskName        -Value $item.'name'
+                $object | Add-Member –MemberType NoteProperty –Name TaskDescription -Value $item.'description'
+                $object | Add-Member –MemberType NoteProperty –Name TaskStartDate   -Value $item.'startDate'
+                $object | Add-Member –MemberType NoteProperty –Name TaskEndDate     -Value $item.'endDate'
+                $object | Add-Member –MemberType NoteProperty –Name TaskNextRunTime -Value $item.'nextRunTime'
+                $object | Add-Member –MemberType NoteProperty –Name TaskEnabled     -Value $item.'enabled'
+                $object | Add-Member –MemberType NoteProperty –Name TaskValid       -Value $item.'valid'
 
                 $colResult += $object
             }
@@ -638,12 +638,12 @@ function Get-EpoServerTask {
 
                 forEach ( $item in $result.result.list.runningtask ) {
 
-                    $object = New-Object â€“TypeName PSObject
+                    $object = New-Object –TypeName PSObject
 
-                    $object | Add-Member â€“MemberType NoteProperty â€“Name TaskLogID           -Value $item.'taskLogId'
-                    $object | Add-Member â€“MemberType NoteProperty â€“Name TaskName            -Value $item.'taskName'
-                    $object | Add-Member â€“MemberType NoteProperty â€“Name TaskStartDate       -Value $item.'startDate'
-                    $object | Add-Member â€“MemberType NoteProperty â€“Name TaskPercentComplete -Value $item.'percentComplete'
+                    $object | Add-Member –MemberType NoteProperty –Name TaskLogID           -Value $item.'taskLogId'
+                    $object | Add-Member –MemberType NoteProperty –Name TaskName            -Value $item.'taskName'
+                    $object | Add-Member –MemberType NoteProperty –Name TaskStartDate       -Value $item.'startDate'
+                    $object | Add-Member –MemberType NoteProperty –Name TaskPercentComplete -Value $item.'percentComplete'
 
                     $colResult += $object
                 }
@@ -817,55 +817,55 @@ function Get-EpoSystem {
 
     forEach ( $item in $result.result.list.row ) {
 
-        $object = New-Object â€“TypeName PSObject
+        $object = New-Object –TypeName PSObject
 
-        $object | Add-Member â€“MemberType NoteProperty â€“Name AgentGUID           -Value $item.'EPOLeafNode.AgentGUID'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name AgentVersion        -Value $item.'EPOLeafNode.AgentVersion'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name ComputerName        -Value $item.'EPOComputerProperties.ComputerName'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name CPUSerialNum        -Value $item.'EPOComputerProperties.CPUSerialNum'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name CPUSpeed            -Value $item.'EPOComputerProperties.CPUSpeed'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name CPUType             -Value $item.'EPOComputerProperties.CPUType'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name DefaultLangID       -Value $item.'EPOComputerProperties.DefaultLangID'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name Description         -Value $item.'EPOComputerProperties.Description'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name DomainName          -Value $item.'EPOComputerProperties.DomainName'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name ExcludedTags        -Value $item.'EPOLeafNode.ExcludedTags'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name FreeDiskSpace       -Value $item.'EPOComputerProperties.FreeDiskSpace'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name FreeMemory          -Value $item.'EPOComputerProperties.FreeMemory'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name IPAddress           -Value $item.'EPOComputerProperties.IPAddress'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name IPHostName          -Value $item.'EPOComputerProperties.IPHostName'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name IPSubnet            -Value $item.'EPOComputerProperties.IPSubnet'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name IPSubnetMask        -Value $item.'EPOComputerProperties.IPSubnetMask'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name IPV4x               -Value $item.'EPOComputerProperties.IPV4x'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name IPV6                -Value $item.'EPOComputerProperties.IPV6'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name IPXAddress          -Value $item.'EPOComputerProperties.IPXAddress'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name IsPortable          -Value $item.'EPOComputerProperties.IsPortable'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name LastAgentHandler    -Value $item.'EPOComputerProperties.LastAgentHandler'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name LastUpdate          -Value $item.'EPOLeafNode.LastUpdate'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name ManagedState        -Value $item.'EPOLeafNode.ManagedState'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name NetAddress          -Value $item.'EPOComputerProperties.NetAddress'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name NumOfCPU            -Value $item.'EPOComputerProperties.NumOfCPU'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name OSBitMode           -Value $item.'EPOComputerProperties.OSBitMode'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name OSBuildNum          -Value $item.'EPOComputerProperties.OSBuildNum'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name OSOEMID             -Value $item.'EPOComputerProperties.OSOEMID'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name OSPlatform          -Value $item.'EPOComputerProperties.OSPlatform'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name OSServicePackVer    -Value $item.'EPOComputerProperties.OSServicePackVer'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name OSType              -Value $item.'EPOComputerProperties.OSType'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name OSVersion           -Value $item.'EPOComputerProperties.OSVersion'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name ParentID            -Value $item.'EPOComputerProperties.ParentID'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name SubnetAddress       -Value $item.'EPOComputerProperties.SubnetAddress'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name SubnetMask          -Value $item.'EPOComputerProperties.SubnetMask'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name SystemDescription   -Value $item.'EPOComputerProperties.SystemDescription'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name SysvolFreeSpace     -Value $item.'EPOComputerProperties.SysvolFreeSpace'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name SysvolTotalSpace    -Value $item.'EPOComputerProperties.SysvolTotalSpace'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name Tags                -Value $item.'EPOLeafNode.Tags'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name TimeZone            -Value $item.'EPOComputerProperties.TimeZone'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name TotalDiskSpace      -Value $item.'EPOComputerProperties.TotalDiskSpace'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name TotalPhysicalMemory -Value $item.'EPOComputerProperties.TotalPhysicalMemory'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name UserName            -Value $item.'EPOComputerProperties.UserName'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name UserProperty1       -Value $item.'EPOComputerProperties.UserProperty1'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name UserProperty2       -Value $item.'EPOComputerProperties.UserProperty2'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name UserProperty3       -Value $item.'EPOComputerProperties.UserProperty3'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name UserProperty4       -Value $item.'EPOComputerProperties.UserProperty4'
+        $object | Add-Member –MemberType NoteProperty –Name AgentGUID           -Value $item.'EPOLeafNode.AgentGUID'
+        $object | Add-Member –MemberType NoteProperty –Name AgentVersion        -Value $item.'EPOLeafNode.AgentVersion'
+        $object | Add-Member –MemberType NoteProperty –Name ComputerName        -Value $item.'EPOComputerProperties.ComputerName'
+        $object | Add-Member –MemberType NoteProperty –Name CPUSerialNum        -Value $item.'EPOComputerProperties.CPUSerialNum'
+        $object | Add-Member –MemberType NoteProperty –Name CPUSpeed            -Value $item.'EPOComputerProperties.CPUSpeed'
+        $object | Add-Member –MemberType NoteProperty –Name CPUType             -Value $item.'EPOComputerProperties.CPUType'
+        $object | Add-Member –MemberType NoteProperty –Name DefaultLangID       -Value $item.'EPOComputerProperties.DefaultLangID'
+        $object | Add-Member –MemberType NoteProperty –Name Description         -Value $item.'EPOComputerProperties.Description'
+        $object | Add-Member –MemberType NoteProperty –Name DomainName          -Value $item.'EPOComputerProperties.DomainName'
+        $object | Add-Member –MemberType NoteProperty –Name ExcludedTags        -Value $item.'EPOLeafNode.ExcludedTags'
+        $object | Add-Member –MemberType NoteProperty –Name FreeDiskSpace       -Value $item.'EPOComputerProperties.FreeDiskSpace'
+        $object | Add-Member –MemberType NoteProperty –Name FreeMemory          -Value $item.'EPOComputerProperties.FreeMemory'
+        $object | Add-Member –MemberType NoteProperty –Name IPAddress           -Value $item.'EPOComputerProperties.IPAddress'
+        $object | Add-Member –MemberType NoteProperty –Name IPHostName          -Value $item.'EPOComputerProperties.IPHostName'
+        $object | Add-Member –MemberType NoteProperty –Name IPSubnet            -Value $item.'EPOComputerProperties.IPSubnet'
+        $object | Add-Member –MemberType NoteProperty –Name IPSubnetMask        -Value $item.'EPOComputerProperties.IPSubnetMask'
+        $object | Add-Member –MemberType NoteProperty –Name IPV4x               -Value $item.'EPOComputerProperties.IPV4x'
+        $object | Add-Member –MemberType NoteProperty –Name IPV6                -Value $item.'EPOComputerProperties.IPV6'
+        $object | Add-Member –MemberType NoteProperty –Name IPXAddress          -Value $item.'EPOComputerProperties.IPXAddress'
+        $object | Add-Member –MemberType NoteProperty –Name IsPortable          -Value $item.'EPOComputerProperties.IsPortable'
+        $object | Add-Member –MemberType NoteProperty –Name LastAgentHandler    -Value $item.'EPOComputerProperties.LastAgentHandler'
+        $object | Add-Member –MemberType NoteProperty –Name LastUpdate          -Value $item.'EPOLeafNode.LastUpdate'
+        $object | Add-Member –MemberType NoteProperty –Name ManagedState        -Value $item.'EPOLeafNode.ManagedState'
+        $object | Add-Member –MemberType NoteProperty –Name NetAddress          -Value $item.'EPOComputerProperties.NetAddress'
+        $object | Add-Member –MemberType NoteProperty –Name NumOfCPU            -Value $item.'EPOComputerProperties.NumOfCPU'
+        $object | Add-Member –MemberType NoteProperty –Name OSBitMode           -Value $item.'EPOComputerProperties.OSBitMode'
+        $object | Add-Member –MemberType NoteProperty –Name OSBuildNum          -Value $item.'EPOComputerProperties.OSBuildNum'
+        $object | Add-Member –MemberType NoteProperty –Name OSOEMID             -Value $item.'EPOComputerProperties.OSOEMID'
+        $object | Add-Member –MemberType NoteProperty –Name OSPlatform          -Value $item.'EPOComputerProperties.OSPlatform'
+        $object | Add-Member –MemberType NoteProperty –Name OSServicePackVer    -Value $item.'EPOComputerProperties.OSServicePackVer'
+        $object | Add-Member –MemberType NoteProperty –Name OSType              -Value $item.'EPOComputerProperties.OSType'
+        $object | Add-Member –MemberType NoteProperty –Name OSVersion           -Value $item.'EPOComputerProperties.OSVersion'
+        $object | Add-Member –MemberType NoteProperty –Name ParentID            -Value $item.'EPOComputerProperties.ParentID'
+        $object | Add-Member –MemberType NoteProperty –Name SubnetAddress       -Value $item.'EPOComputerProperties.SubnetAddress'
+        $object | Add-Member –MemberType NoteProperty –Name SubnetMask          -Value $item.'EPOComputerProperties.SubnetMask'
+        $object | Add-Member –MemberType NoteProperty –Name SystemDescription   -Value $item.'EPOComputerProperties.SystemDescription'
+        $object | Add-Member –MemberType NoteProperty –Name SysvolFreeSpace     -Value $item.'EPOComputerProperties.SysvolFreeSpace'
+        $object | Add-Member –MemberType NoteProperty –Name SysvolTotalSpace    -Value $item.'EPOComputerProperties.SysvolTotalSpace'
+        $object | Add-Member –MemberType NoteProperty –Name Tags                -Value $item.'EPOLeafNode.Tags'
+        $object | Add-Member –MemberType NoteProperty –Name TimeZone            -Value $item.'EPOComputerProperties.TimeZone'
+        $object | Add-Member –MemberType NoteProperty –Name TotalDiskSpace      -Value $item.'EPOComputerProperties.TotalDiskSpace'
+        $object | Add-Member –MemberType NoteProperty –Name TotalPhysicalMemory -Value $item.'EPOComputerProperties.TotalPhysicalMemory'
+        $object | Add-Member –MemberType NoteProperty –Name UserName            -Value $item.'EPOComputerProperties.UserName'
+        $object | Add-Member –MemberType NoteProperty –Name UserProperty1       -Value $item.'EPOComputerProperties.UserProperty1'
+        $object | Add-Member –MemberType NoteProperty –Name UserProperty2       -Value $item.'EPOComputerProperties.UserProperty2'
+        $object | Add-Member –MemberType NoteProperty –Name UserProperty3       -Value $item.'EPOComputerProperties.UserProperty3'
+        $object | Add-Member –MemberType NoteProperty –Name UserProperty4       -Value $item.'EPOComputerProperties.UserProperty4'
 
         $colResult += $object
     }
@@ -908,11 +908,11 @@ function Get-EpoTag {
 
     forEach ( $item in $result.result.list.element.TagEPO ) {
 
-        $object = New-Object â€“TypeName PSObject
+        $object = New-Object –TypeName PSObject
 
-        $object | Add-Member â€“MemberType NoteProperty â€“Name tagId    -Value $item.'tagId'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name tagName  -Value $item.'tagName'
-        $object | Add-Member â€“MemberType NoteProperty â€“Name tagNotes -Value $item.'tagNotes'
+        $object | Add-Member –MemberType NoteProperty –Name tagId    -Value $item.'tagId'
+        $object | Add-Member –MemberType NoteProperty –Name tagName  -Value $item.'tagName'
+        $object | Add-Member –MemberType NoteProperty –Name tagNotes -Value $item.'tagNotes'
 
         $colResult += $object
     }
