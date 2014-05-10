@@ -44,7 +44,9 @@ function Connect-EpoServer {
         [parameter(Mandatory=$false,Position=1)]
         [string]$EpoPort = $MyInvocation.MyCommand.Module.PrivateData['pd_EpoPort'],
         [parameter(Mandatory=$false,Position=2,ValueFromPipeline=$True)]
-        $Credential = (Get-Credential -Credential $null)
+        $Credential = (Get-Credential -Credential $null),
+        [parameter(Mandatory=$false,Position=3)]
+        [switch]$Insecure
     )
 
     $EpoServer_old = $MyInvocation.MyCommand.Module.PrivateData['pd_EpoServer']
@@ -167,6 +169,11 @@ function Connect-EpoServer {
 
     # Join the two parameter values (loaded from CLI or PSD1 file) to create the connection string
     $MyInvocation.MyCommand.Module.PrivateData['pd_EpoConnection'] = ($EpoServer + ":" + $EpoPort)
+
+    # Ignore SSL Trust for sites with self-signed certificates
+    if ($Insecure) {
+        [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}
+    }
 
     # Create the web client object + load user credentials into the PowerShell web client object
     $wc = New-Object System.Net.WebClient
