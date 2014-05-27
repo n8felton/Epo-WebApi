@@ -182,9 +182,6 @@ function Connect-EpoServer {
     # Load the web client object into the global variable for use through other module functions
     $MyInvocation.MyCommand.Module.PrivateData['pd_EpoWebClient'] = $wc
 
-    # Display the connection information for the current binding
-    Get-EpoVersion
-
 <#
 .SYNOPSIS
    Connect-EpoServer
