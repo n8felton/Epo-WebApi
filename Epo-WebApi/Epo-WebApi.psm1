@@ -34,25 +34,52 @@
 $epoColorWarning = 'Yellow'
 $epoColorError   = 'Red'
 
-#region ePO Server Connection/Initialization
-function Connect-EpoServer {
+<#
+.SYNOPSIS
+   Connect-EpoServer
 
-    param (
+.DESCRIPTION
+   Connect-EpoServer
 
-        [parameter(Mandatory=$false,Position=0)]
-        [string]$EpoServer = $MyInvocation.MyCommand.Module.PrivateData['pd_EpoServer'],
-        [parameter(Mandatory=$false,Position=1)]
-        [string]$EpoPort = $MyInvocation.MyCommand.Module.PrivateData['pd_EpoPort'],
-        [parameter(Mandatory=$false,Position=2,ValueFromPipeline=$True)]
+.NOTES
+   Author:    _vidrine
+   Created:   2013.08.05
+   Update:    2014.05.07
+#>
+function Connect-EpoServer
+{
+    [CmdletBinding()]
+    Param
+    (
+        # URL of the ePO server
+        [Parameter(Mandatory=$false,
+                   Position=0)]
+        [string]
+        $EpoServer = $MyInvocation.MyCommand.Module.PrivateData['pd_EpoServer'],
+
+        # Port number of the ePO server
+        [Parameter(Mandatory=$false,
+                   Position=1)]
+        [string]
+        $EpoPort = $MyInvocation.MyCommand.Module.PrivateData['pd_EpoPort'],
+
+        # Credential object
+        [Parameter(Mandatory=$false,
+                   Position=2,
+                   ValueFromPipeline=$True)]
         $Credential = (Get-Credential -Credential $null),
-        [parameter(Mandatory=$false,Position=3)]
-        [switch]$Insecure
+
+        # Option to allow for untrusted certificates
+        [Parameter(Mandatory=$false,
+                   Position=3)]
+        [switch]
+        $Insecure
     )
 
     $EpoServer_old = $MyInvocation.MyCommand.Module.PrivateData['pd_EpoServer']
     $EpoPort_old   = $MyInvocation.MyCommand.Module.PrivateData['pd_EpoPort']
 
-    # Set the module global parameters based on function parameters
+    # Set the module global Parameters based on function Parameters
     # This will only process if the loaded values are "" / blank from the PSD1 file.
     if ( $EpoServer -eq "" ) {
 
@@ -167,7 +194,7 @@ function Connect-EpoServer {
         }
     }
 
-    # Join the two parameter values (loaded from CLI or PSD1 file) to create the connection string
+    # Join the two Parameter values (loaded from CLI or PSD1 file) to create the connection string
     $MyInvocation.MyCommand.Module.PrivateData['pd_EpoConnection'] = ($EpoServer + ":" + $EpoPort)
 
     # Ignore SSL Trust for sites with self-signed certificates
@@ -182,20 +209,8 @@ function Connect-EpoServer {
     # Load the web client object into the global variable for use through other module functions
     $MyInvocation.MyCommand.Module.PrivateData['pd_EpoWebClient'] = $wc
 
-<#
-.SYNOPSIS
-   Connect-EpoServer
 
-.DESCRIPTION
-   Connect-EpoServer
-
-.NOTES
-   Author:    _vidrine
-   Created:   2013.08.05
-   Update:    2014.05.07
-#>
 }
-#endregion ePO Server Connection/Initialization
 
 #=================================================================
 
@@ -266,13 +281,23 @@ function Get-EpoAgentHandler {
 #endregion /remote/detectedsystem
 
 #region /remote/eeadmin
-function Get-EpoEncryptionKey {
+function Get-EpoEncryptionKey
+{
+    Param
+    (
+        #
+        [Parameter(Mandatory=$true,
+                   Position=0,
+                   ParameterSetName="MachineName")]
+        [String]
+        $machineName,
 
-    param (
-        [parameter(Mandatory=$true,Position=0,ParameterSetName="MachineName")]
-        [String]$machineName,
-        [parameter(Mandatory=$true,Position=1,ParameterSetName="MachineId")]
-        [String]$machineId
+        #
+        [Parameter(Mandatory=$true,
+                   Position=1,
+                   ParameterSetName="MachineId")]
+        [String]
+        $machineId
     )
 
     switch ($PsCmdlet.ParameterSetName) {
@@ -376,11 +401,15 @@ function Get-EpoVersion {
 #endregion /remote/epogroup
 
 #region /remote/policy
-function Get-EpoPolicy {
-
-    param (
-        [parameter(Mandatory=$false,Position=0,ParameterSetName="Filter")]
-        [String]$Filter
+function Get-EpoPolicy
+{
+    Param
+    (
+        [Parameter(Mandatory=$false,
+                   Position=0,
+                   ParameterSetName="Filter")]
+        [String]
+        $Filter
     )
 
     # Configure the target API URL
@@ -435,13 +464,21 @@ function Get-EpoPolicy {
    Update:    2014.05.08
 #>
 }
-function Export-EpoPolicy {
+function Export-EpoPolicy
+{
+    Param
+    (
+        # 
+        [Parameter(Mandatory=$true,
+                   Position=0)]
+        [string]
+        $productId,
 
-    param(
-        [parameter(Mandatory=$true,Position=0)]
-        [string]$productId,
-        [parameter(Mandatory=$true,Position=1)]
-        [string]$fileName
+        #
+        [Parameter(Mandatory=$true,
+                   Position=1)]
+        [string]
+        $fileName
     )
 
     # Configure the target API URL
@@ -480,20 +517,33 @@ function Import-EpoPolicy {}
 #endregion /remote/rsd
 
 #region /remote/scheduler
-function Get-EpoServerTask {
-
+function Get-EpoServerTask
+{
     [CmdletBinding(DefaultParameterSetName="All")]
+    Param
+    (
+        # String filter for server task query
+        [Parameter(Position=0,
+                   ParameterSetName='TaskName')]
+        [string]
+        $TaskName = '',
 
-    param (
-        [parameter(Position=0,ParameterSetName='TaskName')]
-        [string]$TaskName = '',       # String filter for server task query
-        [parameter(Position=1,ParameterSetName='TaskID')]
-        [int]$TaskID = '',          # Integer value for server task id
-        [parameter(Position=2,ParameterSetName='Running')]
-        [switch]$Running = $false,  # List all RUNNING server tasks
+        # Integer value for server task id
+        [Parameter(Position=1,ParameterSetName='TaskID')]
+        [int]
+        $TaskID = '',
+
+        # List all RUNNING server tasks
+        [Parameter(Position=2,
+                   ParameterSetName='Running')]
+        [switch]
+        $Running = $false,
+
+        # List all ENABLED server tasks
         [ValidateSet("Enabled","Disabled")]
-        [parameter(Position=3)]
-        [string]$Status = ""        # List all ENABLED server tasks
+        [Parameter(Position=3)]
+        [string]
+        $Status = ""        
     )
 
     # Nested function to return all server tasks - USED for sub-filtering
@@ -695,13 +745,23 @@ function Get-EpoServerTask {
    Update:    2014.05.07
 #>
 }
-function Enable-EpoServerTask {
+function Enable-EpoServerTask
+{
+    Param
+    (
+        # String value for the ePO Server Task Name
+        [Parameter(Mandatory=$false,
+                   Position=0,
+                   ParameterSetName='TaskName')]
+        [string]
+        $TaskName = '',
 
-    param (
-        [Parameter(Mandatory=$false,Position=0,ParameterSetName='TaskName')]
-        [string]$TaskName = '',  # String value for the ePO Server Task Name
-        [Parameter(Mandatory=$false,Position=1,ParameterSetName='TaskID')]
-        [int]$TaskID = ''  # Int value for the ePO Server TaskID
+        # Int value for the ePO Server TaskID
+        [Parameter(Mandatory=$false,
+                   Position=1,
+                   ParameterSetName='TaskID')]
+        [int]
+        $TaskID = ''  
     )
 
     switch ($PsCmdlet.ParameterSetName) {
@@ -744,13 +804,23 @@ function Enable-EpoServerTask {
    Update:    2014.05.07
 #>
 }
-function Disable-EpoServerTask {
-
-    param (
-        [Parameter(Mandatory=$false,Position=0,ParameterSetName='TaskName')]
-        [string]$TaskName = '',  # String value for the ePO Server Task Name
-        [Parameter(Mandatory=$false,Position=1,ParameterSetName='TaskID')]
-        [int]$TaskID = ''  # Int value for the ePO Server TaskID
+function Disable-EpoServerTask
+{
+    Param
+    (
+        # String value for the ePO Server Task Name
+        [Parameter(Mandatory=$false,
+                   Position=0,
+                   ParameterSetName='TaskName')]
+        [string]
+        $TaskName = '',
+        
+        # Int value for the ePO Server TaskID
+        [Parameter(Mandatory=$false,
+                   Position=1,
+                   ParameterSetName='TaskID')]
+        [int]
+        $TaskID = ''  
     )
 
     switch ($PsCmdlet.ParameterSetName) {
@@ -798,12 +868,16 @@ function Stop-EpoServerTask {}
 #endregion /remote/scheduler
 
 #region /remote/system
-function Get-EpoSystem {
-
-	param (
-
-        [parameter(Mandatory=$true,Position=0,ParameterSetName="Filter")]
-        [String]$Filter
+function Get-EpoSystem
+{
+	Param
+    (
+        # 
+        [Parameter(Mandatory=$true,
+                   Position=0,
+                   ParameterSetName="Filter")]
+        [String]
+        $Filter
     )
 
     # Configure the target API URL
@@ -889,12 +963,16 @@ function Get-EpoSystem {
    Update:    2014.05.07
 #>
 }
-function Get-EpoTag {
-
-	param (
-
-        [parameter(Mandatory=$true,Position=0,ParameterSetName="Filter")]
-        [String]$Filter
+function Get-EpoTag
+{
+	Param
+    (
+        # 
+        [Parameter(Mandatory=$true,
+                   Position=0,
+                   ParameterSetName="Filter")]
+        [String]
+        $Filter
     )
 
     # Configure the target API URL
