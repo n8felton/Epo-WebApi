@@ -26,7 +26,7 @@
 
 .NOTES
    Author:    _vidrine
-   FileName:  epo-webapi.psm1
+   FileName:  Epo-WebApi.psm1
    Created:   2013.08.05
    Update:    2014.05.08
 #>
