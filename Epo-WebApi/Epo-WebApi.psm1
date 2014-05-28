@@ -1,5 +1,11 @@
 #REQUIRES -version 2.0
 
+Import-Module ..\PowerShellLogging\PowerShellLogging.psm1
+$LogFile = Enable-LogFile -Path $env:APPDATA\Epo-WebApi.log
+
+$VerbosePreference = 'Continue'
+$DebugPreference = 'Continue'
+
 <#
 .SYNOPSIS
    PowerShell functions created to work with the McAfee Web API.
@@ -423,6 +429,7 @@ function Get-EpoPolicy
         $urlExtension = "/remote/policy.find?:output=xml"
     }
 	$URL          = $urlBase + $urlExtension
+    Write-Debug "API URL: $URL"
 
     # Make the connection to the MFE API URL
     # Place results in an XML variable
