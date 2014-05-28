@@ -67,7 +67,7 @@ function Connect-EpoServer
         [Parameter(Mandatory=$false,
                    Position=2,
                    ValueFromPipeline=$True)]
-        $Credential = (Get-Credential -Credential $null),
+        $Credential = $host.ui.PromptForCredential("Enter McAfee ePO Credentials", "Please enter your user name and password.", "", "McafeeEpoCredentials"),
 
         # Option to allow for untrusted certificates
         [Parameter(Mandatory=$false,
@@ -204,7 +204,7 @@ function Connect-EpoServer
 
     # Create the web client object + load user credentials into the PowerShell web client object
     $wc = New-Object System.Net.WebClient
-    $wc.credentials = New-Object System.Net.NetworkCredential -ArgumentList ($Credential.GetNetworkCredential().username,$Credential.GetNetworkCredential().password)
+    $wc.credentials = New-Object System.Net.NetworkCredential -ArgumentList ($Credential.username,$Credential.GetNetworkCredential().password)
 
     # Load the web client object into the global variable for use through other module functions
     $MyInvocation.MyCommand.Module.PrivateData['pd_EpoWebClient'] = $wc
